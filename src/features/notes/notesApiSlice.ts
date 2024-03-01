@@ -4,6 +4,7 @@ import type { RootState } from "../../app/store";
 
 export interface Note {
   user: string;
+  username: string;
   title: string;
   text: string;
   completed: boolean;
