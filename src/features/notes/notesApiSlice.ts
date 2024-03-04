@@ -30,7 +30,7 @@ export const notesApiSlice = apiSlice.injectEndpoints({
           return response.status === 200 && !result.isError;
         },
       }),
-      keepUnusedDataFor: 5,
+      // keepUnusedDataFor = 60 seconds by default
       transformResponse: (responseData: Note[]) => {
         const loadedNotes = responseData.map((note) => {
           note.id = note._id;

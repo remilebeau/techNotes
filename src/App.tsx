@@ -6,6 +6,12 @@ import DashLayout from "./components/DashLayout";
 import Welcome from "./features/auth/Welcome";
 import NotesList from "./features/notes/NotesList";
 import UsersList from "./features/users/UsersList";
+import EditUser from "./features/users/EditUser";
+import NewUserForm from "./features/users/NewUserForm";
+import EditNote from "./features/notes/EditNote";
+import NewNote from "./features/notes/NewNote";
+import Prefetch from "./features/auth/Prefetch";
+
 function App() {
   return (
     <Routes>
@@ -23,22 +29,33 @@ function App() {
 
         {/* begin protected routes */}
 
-        {/* layout for protected routes */}
-        <Route path="dash" element={<DashLayout />}>
-          {/* /dash */}
-          <Route index element={<Welcome />} />
+        {/* wrap the protected routes in Prefetch */}
+        <Route element={<Prefetch />}>
+          {/* layout for protected routes */}
+          <Route path="dash" element={<DashLayout />}>
+            {/* /dash */}
+            <Route index element={<Welcome />} />
 
-          {/* /dash/notes */}
-          <Route path="notes" element={<NotesList />}>
-            {/* add more notes routes here */}
+            {/* /dash/users */}
+            <Route path="users">
+              <Route index element={<UsersList />} />
+              {/* /dash/users/:id */}
+              <Route path=":id" element={<EditUser />} />
+              {/* /dash/users/new */}
+              <Route path="new" element={<NewUserForm />} />
+            </Route>
+
+            {/* /dash/notes */}
+            <Route path="notes">
+              <Route index element={<NotesList />} />
+              {/* /dash/notes/:id */}
+              <Route path=":id" element={<EditNote />} />
+              {/* /dash/notes/new */}
+              <Route path="new" element={<NewNote />} />
+            </Route>
+
+            {/* end protected routes */}
           </Route>
-
-          {/* /dash/users */}
-          <Route path="users" element={<UsersList />}>
-            {/* add more users routes here */}
-          </Route>
-
-          {/* end protected routes */}
         </Route>
       </Route>
     </Routes>

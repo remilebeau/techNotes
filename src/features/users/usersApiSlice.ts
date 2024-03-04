@@ -24,11 +24,16 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           return response.status === 200 && !result.isError;
         },
       }),
-      keepUnusedDataFor: 5,
+      // keepUnusedDataFor = 60 seconds by default
       transformResponse: (responseData: User[]) => {
-        const loadedUsers = responseData.map((user) => {
-          user.id = user._id;
-          return user;
+        // sort users alphabetically
+        const sortedUsers = responseData.sort((a, b) =>
+          a.username.localeCompare(b.username)
+        );
+        // assign id to _id from mongoDB
+        const loadedUsers = responseData.map((sortedUsers) => {
+          sortedUsers.id = sortedUsers._id;
+          return sortedUsers;
         });
         return usersAdapter.setAll(initialState, loadedUsers);
       },
