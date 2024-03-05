@@ -5,12 +5,15 @@ import { useAppDispatch } from "../../app/hooks";
 import { setCredentials } from "./authSlice";
 import { useLoginMutation } from "./authApiSlice";
 
+import usePersist from "../../hooks/usePersist";
+
 const Login = () => {
   const userRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const errRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [persist, setPersist] = usePersist();
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -30,6 +33,10 @@ const Login = () => {
   };
   const handlePwdInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+  };
+
+  const handleToggle = () => {
+    setPersist((prev: boolean) => !prev);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -89,6 +96,18 @@ const Login = () => {
             value={password}
             required
           />
+
+          <label htmlFor="persist" className="form__persist">
+            <input
+              type="checkbox"
+              className="form__checkbox"
+              id="persist"
+              onChange={handleToggle}
+              checked={persist}
+            />
+            Trust This Device
+          </label>
+
           <button className="form__submit-button">Sign In</button>
         </form>
       </main>

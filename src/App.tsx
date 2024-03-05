@@ -11,6 +11,7 @@ import NewUserForm from "./features/users/NewUserForm";
 import EditNote from "./features/notes/EditNote";
 import NewNote from "./features/notes/NewNote";
 import Prefetch from "./features/auth/Prefetch";
+import PersistLogin from "./features/auth/PersistLogin";
 
 function App() {
   return (
@@ -29,32 +30,34 @@ function App() {
 
         {/* begin protected routes */}
 
-        {/* wrap the protected routes in Prefetch */}
+        {/* wrap the protected routes in Prefetch and PersistLogin*/}
         <Route element={<Prefetch />}>
-          {/* layout for protected routes */}
-          <Route path="dash" element={<DashLayout />}>
-            {/* /dash */}
-            <Route index element={<Welcome />} />
+          <Route element={<PersistLogin />}>
+            {/* layout for protected routes */}
+            <Route path="dash" element={<DashLayout />}>
+              {/* /dash */}
+              <Route index element={<Welcome />} />
 
-            {/* /dash/users */}
-            <Route path="users">
-              <Route index element={<UsersList />} />
-              {/* /dash/users/:id */}
-              <Route path=":id" element={<EditUser />} />
-              {/* /dash/users/new */}
-              <Route path="new" element={<NewUserForm />} />
+              {/* /dash/users */}
+              <Route path="users">
+                <Route index element={<UsersList />} />
+                {/* /dash/users/:id */}
+                <Route path=":id" element={<EditUser />} />
+                {/* /dash/users/new */}
+                <Route path="new" element={<NewUserForm />} />
+              </Route>
+
+              {/* /dash/notes */}
+              <Route path="notes">
+                <Route index element={<NotesList />} />
+                {/* /dash/notes/:id */}
+                <Route path=":id" element={<EditNote />} />
+                {/* /dash/notes/new */}
+                <Route path="new" element={<NewNote />} />
+              </Route>
+
+              {/* end protected routes */}
             </Route>
-
-            {/* /dash/notes */}
-            <Route path="notes">
-              <Route index element={<NotesList />} />
-              {/* /dash/notes/:id */}
-              <Route path=":id" element={<EditNote />} />
-              {/* /dash/notes/new */}
-              <Route path="new" element={<NewNote />} />
-            </Route>
-
-            {/* end protected routes */}
           </Route>
         </Route>
       </Route>

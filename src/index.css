@@ -25,7 +25,7 @@
 }
 
 /* || UTILITY CLASSES */
-.errmsg {
+.errmsg a:any-link {
   display: inline-block;
   background-color: var(--TABLE-BGCOLOR);
   color: var(--ERROR);
