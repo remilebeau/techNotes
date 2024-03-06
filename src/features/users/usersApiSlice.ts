@@ -20,16 +20,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     getUsers: builder.query({
       query: () => ({
         url: "/users",
-        validateStatus: (response, result) => {
+        validateStatus: (response: any, result: any) => {
           return response.status === 200 && !result.isError;
         },
       }),
       // keepUnusedDataFor = 60 seconds by default
       transformResponse: (responseData: User[]) => {
         // sort users alphabetically
-        const sortedUsers = responseData.sort((a, b) =>
-          a.username.localeCompare(b.username)
-        );
+        responseData.sort((a, b) => a.username.localeCompare(b.username));
         // assign id to _id from mongoDB
         const loadedUsers = responseData.map((sortedUsers) => {
           sortedUsers.id = sortedUsers._id;

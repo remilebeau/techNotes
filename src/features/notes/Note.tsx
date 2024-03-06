@@ -1,12 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-
-import { useAppSelector } from "../../app/hooks";
-import { selectNoteById } from "./notesApiSlice";
+import { useGetNotesQuery } from "./notesApiSlice";
+import { memo } from "react";
 
 const Note = ({ noteId }: { noteId: string }) => {
-  const note = useAppSelector((state) => selectNoteById(state, noteId));
+  const { note } = useGetNotesQuery("notesList", {
+    selectFromResult: ({ data }) => ({
+      note: data?.entities[noteId],
+    }),
+  });
 
   const navigate = useNavigate();
   if (note) {
@@ -44,5 +47,6 @@ const Note = ({ noteId }: { noteId: string }) => {
     );
   } else return null;
 };
+const memoizedNote = memo(Note);
 
-export default Note;
+export default memoizedNote;

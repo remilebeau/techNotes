@@ -1,12 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-
-import { useAppSelector } from "../../app/hooks";
-import { selectUserById } from "./usersApiSlice";
+import { useGetUsersQuery } from "./usersApiSlice";
+import { memo } from "react";
 
 const User = ({ userId }: { userId: string }) => {
-  const user = useAppSelector((state) => selectUserById(state, userId));
+  const { user } = useGetUsersQuery("usersList", {
+    selectFromResult: ({ data }) => ({
+      user: data?.entities[userId],
+    }),
+  });
 
   const navigate = useNavigate();
 
@@ -30,5 +33,6 @@ const User = ({ userId }: { userId: string }) => {
     );
   } else return null;
 };
+const memoizedUser = memo(User);
 
-export default User;
+export default memoizedUser;
