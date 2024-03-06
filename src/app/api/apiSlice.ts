@@ -3,7 +3,7 @@ import type { RootState } from "../store";
 import { setCredentials } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://technotes-api.onrender.com",
+  baseUrl: "https://technotes-api-56e3.onrender.com",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
