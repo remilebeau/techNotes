@@ -1,4 +1,4 @@
-# techNotes Frontend
+# techNotes
 
 The frontend of a MERN stack app to replace the notes system of a ficticious business.
 
@@ -6,10 +6,9 @@ The frontend of a MERN stack app to replace the notes system of a ficticious bus
 
 - React.js
 - Redux Toolkit
-- TypeScript
 
-Connected to my [techNotes-backend](https://github.com/remilebeau/techNotes-backend)
+Connected to [techNotes API](https://github.com/remilebeau/techNotes-api)
 
 [Live Demo](https://technotes-op6s.onrender.com/)
 
-This app is hosted on the free tier of Render, which winds down servers after inactivity. Please allow up to 30 seconds for the server to wake up when testing this app.
+Because this app is hosted on the free tier of [Render](https://render.com), please allow up to 60 seconds for the first request.
