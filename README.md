@@ -1,6 +1,6 @@
 # techNotes
 
-The frontend of a MERN stack app to replace the notes system of a ficticious business.
+The frontend of a ticket management app.
 
 Connected to [techNotes API](https://github.com/remilebeau/techNotes-api)
 
